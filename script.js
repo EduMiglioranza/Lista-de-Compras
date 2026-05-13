@@ -1,16 +1,21 @@
+// Selecting HTML elements
 const form = document.querySelector("form")
-const itemName =  document.getElementById("itemName")
+const itemName = document.getElementById("itemName")
 const itemsList = document.querySelector("ul")
 
+// Define the behavior of the submit buttom. 
 form.onsubmit = () => {
+    // Prevent the reload on submit
     event.preventDefault()
+
+    // Create a product object with id and name
     const product = {
         id: new Date().getTime(),
         name: itemName.value
     }
 
+    // Calls the function to add the product in the list
     addToList(product)
-    console.log(product.id)
 }
 
 function addToList (product) {
@@ -44,12 +49,10 @@ function addToList (product) {
         // Creating the trash icon
         const remove = document.createElement("a")
         remove.setAttribute("href", "#")
-
         const removeIcon = document.createElement("img")
         removeIcon.setAttribute("src", "./assets/Trash.svg")
         removeIcon.setAttribute("alt", "icone de lixo para excluir elemento da lista.")
         removeIcon.classList.add("remove")
-
         remove.append(removeIcon)
     
         // Add all the elements in the li
@@ -63,11 +66,14 @@ function addToList (product) {
     }
 }
 
+// Function that allows us to delete a product from the list.
 itemsList.addEventListener("click", function(event){
+    // target the click on the remove icon
     if (event.target.classList.contains("remove")){
         console.log(event)
         const trash = event.target.closest(".product")
 
+        // Delete the product
         trash.remove()
     }
 })
